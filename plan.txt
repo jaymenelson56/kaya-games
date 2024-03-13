@@ -1,0 +1,32 @@
+Chapter 1: MVP
+
+Chapter 1-A: Displaying the Landing Page
+
+1. Create a directory titled Home.
+2. In a seperate directory "NavBar" Create a navigation bar. Refer to Honey Rae on how.
+3. We will want a banner that welcomes us to the site as well as a footer that contains a jump to the review section of the sit.
+4. Floating on the right side of the screen, we will be greeted with the wonderful image of a smiling Kaya.
+5. Below her photo will be an extremely brief description of the site.
+
+Chapter 2-A: Dispaying the Reviews Page
+
+1. Here we just need a un-ordered list to display all the reviews and a tab at the upper right hand side of the scrren to post a new review.
+
+Chapter 3-A: Site Mission
+
+1. A Happy Photo of Kaya enjoying life with a brief but heart felt description about her and the site.
+
+Chapter 4-A: View Review Page
+
+1. I need a photo of of Kaya centered at the top of the page above the review title.
+2. The Authors name at the upper left side of an article and the section being the body of the review.
+3. A drop down menu that inserts a photo of Kaya reactions that would go at the very bottom of the review.
+
+Chapter 5-A: View review from the Author's perspective.
+1. Everything the original review had with some added extras.
+2. An edit button at the bottom.
+3. A delete button in the upper left section.
+
+Chapter 6-A: Post and edit
+1. Displays everything the other view perspective had but allows input change for title and body and reaction.
+2. Edit is replaced by a post button.
