@@ -2,7 +2,7 @@ Chapter 1: MVP
 
 Chapter 1-A: Displaying the Landing Page
 
-1. Create a directory titled Home.
+1. Create a directory titled Welcome.
 2. In a seperate directory "NavBar" Create a navigation bar. Refer to Honey Rae on how.
 3. We will want a banner that welcomes us to the site as well as a footer that contains a jump to the review section of the sit.
 4. Floating on the right side of the screen, we will be greeted with the wonderful image of a smiling Kaya.
