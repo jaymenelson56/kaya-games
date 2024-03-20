@@ -29,7 +29,7 @@ export const AppViews = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/reviews">
                     <Route index element={<ReviewList />} />
-                    <Route path=":reviewId" element={<ViewReview />} />
+                    <Route path=":reviewId" element={<ViewReview currentUser={currentUser} />} />
                     <Route path="create" element={<CreateReview currentUser={currentUser} />} />
                 </Route>
 
