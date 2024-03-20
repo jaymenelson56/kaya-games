@@ -21,7 +21,7 @@ export const createUser = (customer) => {
   }
 
   export const getActualReview = (reviewId) => {
-    return fetch (`http://localhost:9001/reviews?id=${reviewId}&_expand=user`).then((res) => res.json())
+    return fetch (`http://localhost:9001/reviews?id=${reviewId}&_expand=user&_expand=reaction`).then((res) => res.json())
   }
 
   export const createNewReview = (review) => {

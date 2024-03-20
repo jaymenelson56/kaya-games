@@ -1,15 +1,17 @@
 
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { deleteReview, getActualReview, updateReview } from "../services/ReviewService"
+import { deleteReview, getActualReview, getReactions, updateReview } from "../services/ReviewService"
 import { ReviewMenuBar } from "./ReviewMenuBar"
+import "./Review.css"
 
 //A block taking up most of the page
 
 export const ViewReview = ({ currentUser }) => {
-  const [review, setReview] = useState({ title: "", body: "" });
+  const [review, setReview] = useState({ title: "", body: "", reactionId: 0, });
   const [userMode, setUserMode] = useState(false)
   const [editMode, setEditMode] = useState(false)
+  const [reactions, setReactions] = useState([])
   const { reviewId } = useParams()
   const navigate = useNavigate()
 
@@ -28,6 +30,11 @@ export const ViewReview = ({ currentUser }) => {
     }
   }, [currentUser, review])
 
+  useEffect(() => {
+    getReactions().then((reactionsArray) =>
+        setReactions(reactionsArray))
+}, [])
+
   const handleDelete = () => {
     deleteReview(review.id).then(() => {
       setReview({})
@@ -38,12 +45,24 @@ export const ViewReview = ({ currentUser }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setReview(prevReview => ({
-      ...prevReview,
-      [name]: value
-    }));
+    if (name === "reactionId") {
+        const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
+        setReview(prevReview => ({
+            ...prevReview,
+            reaction: selectedReaction,
+            [name]: value
+        }));
+    } else {
+        setReview(prevReview => ({
+            ...prevReview,
+            [name]: value
+        }));
+    }
+
 
   }
+
+  
 
   const handleSave = (event) => {
     event.preventDefault()
@@ -53,6 +72,7 @@ export const ViewReview = ({ currentUser }) => {
       userId: review.userId,
       title: review.title,
       body: review.body,
+      reactionId: review.reactionId
     }
     updateReview(editedReview).then(() => {
       navigate(`/reviews/${review.id}`)
@@ -72,6 +92,7 @@ export const ViewReview = ({ currentUser }) => {
         handleDelete={handleDelete}
         handleSave={handleSave}
         setEditMode={setEditMode}
+        reactions={reactions}
       />
 
 
