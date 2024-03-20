@@ -20,4 +20,6 @@ View Reveiws by clicking on them.
 
 You will be free to edit or delete your own reviews after publishing them by clicking the respective buttons.
 
+Here is the link to the api repository https://github.com/jaymenelson56/kaya-games-api
+
 
