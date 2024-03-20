@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./Home.css"
 
 export const Home = () => {
@@ -9,12 +10,12 @@ export const Home = () => {
                 <span>Kaya's Video Game Reviews</span>
             </h1>
             <div>
-                Click here for a review
+            <Link to="/reviews">Click here for reviews</Link>
             </div>
         </div>
         <div className="welcome-container">
             <h1>
-                <span>Photo</span>
+                <span>Kaya Loves Games</span>
             
             </h1>
             <div>

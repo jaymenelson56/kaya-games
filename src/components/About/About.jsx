@@ -1,7 +1,7 @@
 export const About = () => {
     return <div className="home-container">
     <h1>
-        <span>Photo</span>
+        <span>For Kaya</span>
         
     </h1>
     <div>

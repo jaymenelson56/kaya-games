@@ -15,9 +15,19 @@
 }
 
 .title {
-color: darkblue;
+    color: darkblue;
 }
 
-.name{
-color: darkgoldenrod
+.name {
+    color: darkgoldenrod
 }
+
+.view-form{
+    margin: 2rem auto;
+    width: 100%;
+    padding: 5rem 3rem;
+    border: 1px solid var(--outline);
+    background-color: lightgray;
+    border-radius: 0.5rem;
+}
+
