@@ -43,11 +43,13 @@ export const CreateReview = ({ currentUser }) => {
         setNewpost({ ...newpost, reactionId: event.target.value })
     }
     return (
+
         <form className="view-form">
             <fieldset>
                 <div>
-                    <label>Title:</label>
+                    <label htmlFor="title">Title:</label>
                     <input type="text"
+                        id="title"
                         placeholder="Enter Title"
                         name="title"
                         onChange={(event) => {
@@ -61,25 +63,26 @@ export const CreateReview = ({ currentUser }) => {
             </fieldset>
             <fieldset>
                 <div>
-                    <label>Reaction</label>
-                    <select value={newpost.reactionId} onChange={handleReactChange}>
+                    <label htmlFor="reaction.description">Reaction</label>
+                    <select value={newpost.reactionId} name="reaction.description" id="reaction.description" onChange={handleReactChange}>
                         <option value="">Select Reaction...</option>
                         {reactions.map((reaction) => (
                             <option key={reaction.id} value={reaction.id}>
                                 {reaction.description}
                             </option>
                         ))}
-                        
+
                     </select>
                     <div>
-                    {selectedImage && <img src={selectedImage.image} alt={selectedImage.alt} className="photo" />}
+                        {selectedImage && <img src={selectedImage.image} alt={selectedImage.alt} className="photo" />}
                     </div>
                 </div>
             </fieldset>
             <fieldset>
                 <div>
-                    <label>Review:</label>
-                    <textarea
+                    <label htmlFor="review"><div className="label-tag">Review:</div></label>
+                    < textarea
+                        id="review"
                         placeholder="Enter Review"
                         rows={5}
                         cols={30}
@@ -96,9 +99,14 @@ export const CreateReview = ({ currentUser }) => {
             <fieldset>
                 <div>
                     <button onClick={handleSave}>Submit</button>
+
+                </div>
+                <div>
+                    <button className="button-quadro" onClick={() => navigate("/reviews")}>Cancel</button>
                 </div>
             </fieldset>
         </form>
+
     )
 }
 

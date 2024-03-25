@@ -1,7 +1,9 @@
-export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions }) => {
+import { Link } from "react-router-dom"
+
+export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions, navigate }) => {
     return (
         <div className="view-form">
-            <header>
+            <header className="header-title">
                 {editMode === true ? (<>
                     <input className="view-form-edit"
                         type="text"
@@ -16,14 +18,6 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     <span className="view-form-static">{review.title}</span>
                 )}
 
-                {userMode === true ? (<> {editMode === true ? (<><button onClick={handleSave}>Update</button></>
-                ) : (
-                    <> <button onClick={() => setEditMode(true)}>Edit</button></>
-                )}
-                    <button onClick={handleDelete}
-
-                    >Delete</button></>
-                ) : (<></>)}
             </header>
             <div>
                 {editMode === true ? (<>
@@ -37,7 +31,7 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
 
                     </select>
                     <div>
-                    {<img src={review.reaction?.image} alt={review.reaction?.alt}className="photo" />}
+                        {<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}
                     </div>
                 </>) : (<>{<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}</>)}
             </div>
@@ -57,6 +51,18 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                 </>) : (<> <span className="view-form-static">{review.body}</span></>)}
 
             </div>
+            <div className="button-uno">
+
+                {userMode === true ? (<> {editMode === true ? (<><button className="button-dos" onClick={handleSave}>Update</button></>
+                ) : (
+                    <> <button className="button-dos" onClick={() => setEditMode(true)}>Edit</button></>
+                )}
+                    <button className="button-tres" onClick={handleDelete}
+
+                    >Delete</button></>
+                ) : (<></>)}
+            </div>
+            <button className="button-quadro" onClick={() => navigate("/reviews")}>Return</button>
         </div>
     )
 }

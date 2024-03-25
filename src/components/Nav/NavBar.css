@@ -1,23 +1,27 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between; 
     background-color: var(--dark);
-    margin: 0;
-    width: 100%;
+    
+    margin: 0 auto; 
+    width: 100%; 
     padding: 0.5rem;
   }
 
   .navbar-item {
-    flex-basis: 20%;
     list-style-type: none;
     text-align: center;
     color: var(--offWhite);
+    margin-right: 1rem;
+    
   }
 
   .navbar-link {
     text-decoration: none;
     font-family: "Quicksand", sans-serif;
     letter-spacing: 1px;
+    
   }
 
   .navbar-logout {

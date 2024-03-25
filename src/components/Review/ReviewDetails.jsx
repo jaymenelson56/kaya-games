@@ -84,7 +84,7 @@ export const ViewReview = ({ currentUser }) => {
 
   return (
     <section>
-      <ReviewMenuBar
+      <ReviewMenuBar 
         review={review}
         userMode={userMode}
         editMode={editMode}
@@ -93,6 +93,7 @@ export const ViewReview = ({ currentUser }) => {
         handleSave={handleSave}
         setEditMode={setEditMode}
         reactions={reactions}
+        navigate={navigate}
       />
 
 
