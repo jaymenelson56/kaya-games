@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { deleteReview, getActualReview, getReactions, updateReview } from "../services/ReviewService"
+import { deleteReview, getActualReview, getReactions, getVotes, updateReview } from "../services/ReviewService"
 import { ReviewMenuBar } from "./ReviewMenuBar"
 import "./Review.css"
 
@@ -13,6 +13,7 @@ export const ViewReview = ({ currentUser }) => {
   const [editMode, setEditMode] = useState(false)
   const [reactions, setReactions] = useState([])
   const { reviewId } = useParams()
+  const [votes, setVotes] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,82 +33,84 @@ export const ViewReview = ({ currentUser }) => {
 
   useEffect(() => {
     getReactions().then((reactionsArray) =>
-        setReactions(reactionsArray))
-}, [])
+      setReactions(reactionsArray))
+  }, [])
 
-  const handleDelete = () => {
-    deleteReview(review.id).then(() => {
-      setReview({})
-      navigate("/reviews")
-    })
-
-  }
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "reactionId") {
-        const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
-        setReview(prevReview => ({
-            ...prevReview,
-            reaction: selectedReaction,
-            [name]: value
-        }));
-    } else {
-        setReview(prevReview => ({
-            ...prevReview,
-            [name]: value
-        }));
-    }
-
-
-  }
-
+  useEffect(() => {
+    getVotes().then((votesArray) => {
+      const filteredVotes = votesArray.filter(vote => vote.reviewId === reviewId)
+      setVotes(filteredVotes)})
   
+    
+  }, [])
 
-  const handleSave = (event) => {
-    event.preventDefault()
+const handleDelete = () => {
+  deleteReview(review.id).then(() => {
+    setReview({})
+    navigate("/reviews")
+  })
 
-    const editedReview = {
-      id: review.id,
-      userId: review.userId,
-      title: review.title,
-      body: review.body,
-      reactionId: review.reactionId
-    }
-    updateReview(editedReview).then(() => {
-      navigate(`/reviews/${review.id}`)
-      setEditMode(false)
-    })
+}
 
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  if (name === "reactionId") {
+    const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
+    setReview(prevReview => ({
+      ...prevReview,
+      reaction: selectedReaction,
+      [name]: value
+    }));
+  } else {
+    setReview(prevReview => ({
+      ...prevReview,
+      [name]: value
+    }));
   }
-
-
-  return (
-    <section>
-      <ReviewMenuBar 
-        review={review}
-        userMode={userMode}
-        editMode={editMode}
-        handleInputChange={handleInputChange}
-        handleDelete={handleDelete}
-        handleSave={handleSave}
-        setEditMode={setEditMode}
-        reactions={reactions}
-        navigate={navigate}
-      />
-
-
-    </section>
-  )
 
 
 }
 
 
-//A dropdown will appear to allow you to select a reaction
 
-//If one is selected that photo will display at the bottom of the page.
+const handleSave = (event) => {
+  event.preventDefault()
 
-//If user id and review's userId match then a delete button will appear on the upper right hand side of the screen.
+  const editedReview = {
+    id: review.id,
+    userId: review.userId,
+    title: review.title,
+    body: review.body,
+    reactionId: review.reactionId
+  }
+  updateReview(editedReview).then(() => {
+    navigate(`/reviews/${review.id}`)
+    setEditMode(false)
+  })
 
-//Also if they match an edit button will appear, and pressing it will take them to an edit page.
+}
+
+
+return (
+  <section>
+    <ReviewMenuBar
+      review={review}
+      userMode={userMode}
+      editMode={editMode}
+      handleInputChange={handleInputChange}
+      handleDelete={handleDelete}
+      handleSave={handleSave}
+      setEditMode={setEditMode}
+      reactions={reactions}
+      navigate={navigate}
+      votes={votes}
+      numberOfVotes={votes.length} 
+    />
+
+
+  </section>
+)
+
+
+}
+

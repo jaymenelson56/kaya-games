@@ -50,3 +50,7 @@ export const deleteReview = (review) => {
       method: "delete",
   })
 }
+
+export const getVotes = () => {
+  return fetch ("http://localhost:9001/votes").then((res) => res.json())
+}

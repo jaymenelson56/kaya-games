@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions, navigate }) => {
+export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions, navigate, numberOfVotes }) => {
     return (
         <div className="view-form">
             <header className="header-title">
@@ -61,7 +61,10 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
 
                     >Delete</button></>
                 ) : (<></>)}
+           
+           <div> <button className="button-quadro">{numberOfVotes} users like this review</button></div>
             </div>
+           
             <button className="button-quadro" onClick={() => navigate("/reviews")}>Return</button>
         </div>
     )
