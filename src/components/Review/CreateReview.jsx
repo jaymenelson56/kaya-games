@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { createNewReview, getReactions } from "../services/ReviewService"
 
 export const CreateReview = ({ currentUser }) => {
-    const [newpost, setNewpost] = useState({ title: "", body: "", reactionId: 1 })
+    const [newpost, setNewpost] = useState({ title: "", body: "", reactionId: 0 })
     const [reactions, setReactions] = useState([])
     const [selectedImage, setSelectedImage] = useState("")
 

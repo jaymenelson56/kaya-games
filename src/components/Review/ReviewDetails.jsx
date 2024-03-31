@@ -1,17 +1,21 @@
 
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { deleteReview, getActualReview, getReactions, updateReview } from "../services/ReviewService"
+import { createNewComment, deleteReview, getActualReview, getComments, getReactions, updateReview } from "../services/ReviewService"
 import { ReviewMenuBar } from "./ReviewMenuBar"
 import "./Review.css"
 
 //A block taking up most of the page
 
 export const ViewReview = ({ currentUser }) => {
-  const [review, setReview] = useState({ title: "", body: "", reactionId: 0, });
+  const [review, setReview] = useState({ title: "", body: "", reactionId: 0 });
   const [userMode, setUserMode] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [reactions, setReactions] = useState([])
+  const [comments, setComments] = useState([])
+  const [likes, setLikes] = useState((0))
+  const [newComment, setNewComment] = useState({ userId: 0, reviewId: 0, body: "" })
+  const [hasLiked, setHasLiked] = useState(false)
   const { reviewId } = useParams()
   const navigate = useNavigate()
 
@@ -30,10 +34,18 @@ export const ViewReview = ({ currentUser }) => {
     }
   }, [currentUser, review])
 
+
   useEffect(() => {
     getReactions().then((reactionsArray) =>
-        setReactions(reactionsArray))
-}, [])
+      setReactions(reactionsArray))
+  }, [])
+
+  useEffect(() => {
+    getComments().then((commentsData) => {
+      const filteredComments = commentsData.filter(comment => comment.reviewId === review.id)
+      setComments(filteredComments)
+    })
+  }, [review.id])
 
   const handleDelete = () => {
     deleteReview(review.id).then(() => {
@@ -46,23 +58,23 @@ export const ViewReview = ({ currentUser }) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "reactionId") {
-        const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
-        setReview(prevReview => ({
-            ...prevReview,
-            reaction: selectedReaction,
-            [name]: value
-        }));
+      const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
+      setReview(prevReview => ({
+        ...prevReview,
+        reaction: selectedReaction,
+        [name]: value
+      }));
     } else {
-        setReview(prevReview => ({
-            ...prevReview,
-            [name]: value
-        }));
+      setReview(prevReview => ({
+        ...prevReview,
+        [name]: value
+      }));
     }
 
 
   }
 
-  
+
 
   const handleSave = (event) => {
     event.preventDefault()
@@ -82,9 +94,34 @@ export const ViewReview = ({ currentUser }) => {
   }
 
 
+
+  const handleLike = () => {
+    if (hasLiked) {
+      setLikes((prevLikes) => prevLikes - 1)
+      setHasLiked(false)
+    } else {
+      setLikes((prevLikes) => prevLikes + 1)
+      setHasLiked(true)
+    }
+  }
+
+  const handleCommentSave = (event) => {
+    event.preventDefault()
+    if (newComment.body) {
+      const newPost = {
+        userId: currentUser.id,
+        reviewId: review.id,
+        body: newComment.body
+      }
+      createNewComment(newPost).then(() => 
+        window.location.reload())
+    } else {
+      window.alert("Please fill out comment")
+    }
+  }
   return (
     <section>
-      <ReviewMenuBar 
+      <ReviewMenuBar
         review={review}
         userMode={userMode}
         editMode={editMode}
@@ -94,6 +131,13 @@ export const ViewReview = ({ currentUser }) => {
         setEditMode={setEditMode}
         reactions={reactions}
         navigate={navigate}
+        likes={likes}
+        handleLike={handleLike}
+        comments={comments}
+        handleCommentSave={handleCommentSave}
+        currentUser={currentUser}
+        newComment={newComment}
+        setNewComment={setNewComment}
       />
 
 

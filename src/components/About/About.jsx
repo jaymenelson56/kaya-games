@@ -1,7 +1,9 @@
+import "./About.css"
 export const About = () => {
     return <div className="home-container">
     <h1>
         <span>For Kaya</span>
+        <img src="/images/iloveyou.jpg" alt="Pitbull Terrior named Kaya looking at viewer" className="photo-about" />
         
     </h1>
     <div>

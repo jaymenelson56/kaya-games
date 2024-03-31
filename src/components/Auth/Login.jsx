@@ -19,6 +19,7 @@ export const Login = () => {
                     "honey_user",
                     JSON.stringify({
                         id: user.id,
+                        name: user.name,
                     })
                 )
 

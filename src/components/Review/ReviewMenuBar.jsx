@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 
-export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions, navigate }) => {
+export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode, editMode, handleDelete,
+    handleSave, setEditMode, reactions, navigate, likes, handleLike, comments, newComment, handleCommentSave, setNewComment }) => {
     return (
+        
         <div className="view-form">
+            <span><button className="button-cinco" onClick={() => navigate("/reviews")}>Back</button></span>
             <header className="header-title">
                 {editMode === true ? (<>
                     <input className="view-form-edit"
@@ -15,7 +18,7 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     />
                 </>
                 ) : (
-                    <span className="view-form-static">{review.title}</span>
+                    <span className="view-form-static">{review?.title}</span>
                 )}
 
             </header>
@@ -33,7 +36,7 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     <div>
                         {<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}
                     </div>
-                </>) : (<>{<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}</>)}
+                </>) : (<>{<img src={review?.reaction?.image} alt={review.reaction?.alt} className="photo" />}</>)}
             </div>
             <div>
                 <span className="name">{review.user?.name}:</span>
@@ -62,7 +65,38 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     >Delete</button></>
                 ) : (<></>)}
             </div>
-            <button className="button-quadro" onClick={() => navigate("/reviews")}>Return</button>
+            <div className="like-section">
+                <button onClick={handleLike} disabled={userMode || !review.id || editMode}>
+                    Like:<span>{likes} likes</span>
+                </button>
+
+            </div>
+            <div>
+                <h2>Comments</h2>
+
+                {comments.map((comment) => (
+                       
+                 <span key={comment.id}>{comment?.user?.name} commented : {comment.body} <br/></span>
+                
+
+                ))}
+
+            </div>
+            <div>
+                <h3>Type Comment Here</h3>
+                <label htmlFor="comment">{currentUser?.name}: </label>
+                <input type="text"
+                    id="comment"
+                    placeholder="Comment Here"
+                    name="comment"
+                    onChange={(event) => {
+                        const newPostCopy = { ...newComment }
+                        newPostCopy.body = event.target.value
+                        setNewComment(newPostCopy)
+                    }}
+                />
+                <button onClick={handleCommentSave}>Post</button>
+            </div>
         </div>
     )
 }

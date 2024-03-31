@@ -53,10 +53,12 @@
 
 .button-dos {
     margin-right: 12px;
+    background-color: greenyellow;
 }
 
 .button-tres {
     margin-left: 12px;
+    background-color: lightcoral
 }
 
 .button-quadro {
@@ -79,4 +81,19 @@
     width: 225px; 
     height: 245px;
     object-fit: cover; 
+}
+
+.button-cinco {
+    display:flex;
+    justify-content: flex-end;
+    background-color: lightblue;
+}
+.top-right-button {
+    position: absolute;
+    top: 80px; /* Adjust as needed */
+    left: 90px; /* Adjust as needed */
+}
+
+.like-section {
+    margin-top: 12px;
 }

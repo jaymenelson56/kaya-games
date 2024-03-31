@@ -50,3 +50,17 @@ export const deleteReview = (review) => {
       method: "delete",
   })
 }
+
+export const getComments = () => {
+  return fetch ("http://localhost:9001/comments?_expand=user").then((res) => res.json())
+}
+export const createNewComment = (comment) => {
+  return fetch (`http://localhost:9001/comments`, {
+    method: "POST", 
+    headers: { 
+      "Content-Type": "application/json"
+
+    },
+    body:JSON.stringify(comment)
+  })
+}
