@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom"
 
 export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode, editMode, handleDelete,
     handleSave, setEditMode, reactions, navigate, likes, handleLike, comments, newComment, handleCommentSave, setNewComment }) => {
     return (
-        
+
         <div className="view-form">
-            <span><button className="button-cinco" onClick={() => navigate("/reviews")}>Back</button></span>
+            <span><button className="btn-return" onClick={() => navigate("/reviews")}>Back</button></span>
             <header className="header-title">
                 {editMode === true ? (<>
                     <input className="view-form-edit"
@@ -25,7 +24,7 @@ export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode
             <div>
                 {editMode === true ? (<>
                     <select value={review.reaction?.id} name="reactionId" onChange={handleInputChange}>
-                        <option value="">Select Reaction...</option>
+                        <option value="" hidden>Select Reaction...</option>
                         {reactions.map((reaction) => (
                             <option key={reaction.id} value={reaction.id} >
                                 {reaction.description}
@@ -54,13 +53,13 @@ export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode
                 </>) : (<> <span className="view-form-static">{review.body}</span></>)}
 
             </div>
-            <div className="button-uno">
+            <div className="button-panel">
 
-                {userMode === true ? (<> {editMode === true ? (<><button className="button-dos" onClick={handleSave}>Update</button></>
+                {userMode === true ? (<> {editMode === true ? (<><button className="edit-btn" onClick={handleSave}>Update</button></>
                 ) : (
-                    <> <button className="button-dos" onClick={() => setEditMode(true)}>Edit</button></>
+                    <> <button className="edit-btn" onClick={() => setEditMode(true)}>Edit</button></>
                 )}
-                    <button className="button-tres" onClick={handleDelete}
+                    <button className="delete-btn" onClick={handleDelete}
 
                     >Delete</button></>
                 ) : (<></>)}
@@ -75,9 +74,9 @@ export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode
                 <h2>Comments</h2>
 
                 {comments.map((comment) => (
-                       
-                 <span key={comment.id}>{comment?.user?.name} commented : {comment.body} <br/></span>
-                
+
+                    <span key={comment.id}>{comment?.user?.name} commented : {comment.body} <br /></span>
+
 
                 ))}
 
@@ -95,7 +94,7 @@ export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode
                         setNewComment(newPostCopy)
                     }}
                 />
-                <button onClick={handleCommentSave}>Post</button>
+                <button className="post-btn" onClick={handleCommentSave}>Post</button>
             </div>
         </div>
     )

@@ -46,22 +46,26 @@
     background-color: lightgrey;
 }
 
-.button-uno {
+.button-panel {
     display: flex;
     margin-top: 50px;
 }
 
-.button-dos {
+.edit-btn {
     margin-right: 12px;
     background-color: greenyellow;
 }
 
-.button-tres {
+.post-btn {
+    background-color: yellow
+}
+
+.delete-btn {
     margin-left: 12px;
     background-color: lightcoral
 }
 
-.button-quadro {
+.cancel-btn {
     margin-top: 12px;
 }
 
@@ -83,15 +87,10 @@
     object-fit: cover; 
 }
 
-.button-cinco {
+.btn-return {
     display:flex;
     justify-content: flex-end;
     background-color: lightblue;
-}
-.top-right-button {
-    position: absolute;
-    top: 80px; /* Adjust as needed */
-    left: 90px; /* Adjust as needed */
 }
 
 .like-section {

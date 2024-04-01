@@ -65,7 +65,7 @@ export const CreateReview = ({ currentUser }) => {
                 <div>
                     <label htmlFor="reaction.description">Reaction</label>
                     <select value={newpost.reactionId} name="reaction.description" id="reaction.description" onChange={handleReactChange}>
-                        <option value="">Select Reaction...</option>
+                        <option value="" hidden>Select Reaction...</option>
                         {reactions.map((reaction) => (
                             <option key={reaction.id} value={reaction.id}>
                                 {reaction.description}
@@ -102,7 +102,7 @@ export const CreateReview = ({ currentUser }) => {
 
                 </div>
                 <div>
-                    <button className="button-quadro" onClick={() => navigate("/reviews")}>Cancel</button>
+                    <button className="cancel-btn" onClick={() => navigate("/reviews")}>Cancel</button>
                 </div>
             </fieldset>
         </form>
