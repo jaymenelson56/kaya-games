@@ -16,7 +16,7 @@ export const CreateReview = ({ currentUser }) => {
     }, [])
 
     useEffect(() => {
-        const selectedReactionObject = reactions.find((reaction) => reaction.id === parseInt(newpost.reactionId));
+        const selectedReactionObject = reactions.find((reaction) => reaction.id === newpost.reactionId);
         if (selectedReactionObject) {
             setSelectedImage(selectedReactionObject);
         }
@@ -29,7 +29,7 @@ export const CreateReview = ({ currentUser }) => {
                 userId: currentUser.id,
                 title: newpost.title,
                 body: newpost.body,
-                reactionId: parseInt(newpost.reactionId)
+                reactionId: newpost.reactionId
             }
             createNewReview(newReview).then(() => {
                 navigate("/reviews")

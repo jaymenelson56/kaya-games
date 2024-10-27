@@ -58,7 +58,7 @@ export const ViewReview = ({ currentUser }) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "reactionId") {
-      const selectedReaction = reactions.find(reaction => reaction.id === parseInt(value));
+      const selectedReaction = reactions.find(reaction => reaction.id === value);
       setReview(prevReview => ({
         ...prevReview,
         reaction: selectedReaction,
