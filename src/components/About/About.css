@@ -20,3 +20,10 @@
   .home-container>div {
     font-style: italic;
   }
+  .photo-about {
+    margin: 1em;
+
+    border: 12px solid #e39595; 
+
+    object-fit: cover; 
+}

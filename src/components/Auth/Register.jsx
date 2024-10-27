@@ -18,6 +18,7 @@ export const Register = (props) => {
                     "honey_user",
                     JSON.stringify({
                         id: createdUser.id,
+                        name: createdUser.name
                     })
                 )
 

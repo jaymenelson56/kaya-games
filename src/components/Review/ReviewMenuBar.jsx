@@ -1,7 +1,11 @@
-export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, handleDelete, handleSave, setEditMode, reactions }) => {
+
+export const ReviewMenuBar = ({ currentUser, review, handleInputChange, userMode, editMode, handleDelete,
+    handleSave, setEditMode, reactions, navigate, likes, handleLike, comments, newComment, handleCommentSave, setNewComment }) => {
     return (
+
         <div className="view-form">
-            <header>
+            <span><button className="btn-return" onClick={() => navigate("/reviews")}>Back</button></span>
+            <header className="header-title">
                 {editMode === true ? (<>
                     <input className="view-form-edit"
                         type="text"
@@ -13,22 +17,14 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     />
                 </>
                 ) : (
-                    <span className="view-form-static">{review.title}</span>
+                    <span className="view-form-static">{review?.title}</span>
                 )}
 
-                {userMode === true ? (<> {editMode === true ? (<><button onClick={handleSave}>Update</button></>
-                ) : (
-                    <> <button onClick={() => setEditMode(true)}>Edit</button></>
-                )}
-                    <button onClick={handleDelete}
-
-                    >Delete</button></>
-                ) : (<></>)}
             </header>
             <div>
                 {editMode === true ? (<>
                     <select value={review.reaction?.id} name="reactionId" onChange={handleInputChange}>
-                        <option value="">Select Reaction...</option>
+                        <option value="" hidden>Select Reaction...</option>
                         {reactions.map((reaction) => (
                             <option key={reaction.id} value={reaction.id} >
                                 {reaction.description}
@@ -37,9 +33,9 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
 
                     </select>
                     <div>
-                    {<img src={review.reaction?.image} alt={review.reaction?.alt}className="photo" />}
+                        {<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}
                     </div>
-                </>) : (<>{<img src={review.reaction?.image} alt={review.reaction?.alt} className="photo" />}</>)}
+                </>) : (<>{<img src={review?.reaction?.image} alt={review.reaction?.alt} className="photo" />}</>)}
             </div>
             <div>
                 <span className="name">{review.user?.name}:</span>
@@ -56,6 +52,49 @@ export const ReviewMenuBar = ({ review, handleInputChange, userMode, editMode, h
                     />
                 </>) : (<> <span className="view-form-static">{review.body}</span></>)}
 
+            </div>
+            <div className="button-panel">
+
+                {userMode === true ? (<> {editMode === true ? (<><button className="edit-btn" onClick={handleSave}>Update</button></>
+                ) : (
+                    <> <button className="edit-btn" onClick={() => setEditMode(true)}>Edit</button></>
+                )}
+                    <button className="delete-btn" onClick={handleDelete}
+
+                    >Delete</button></>
+                ) : (<></>)}
+            </div>
+            <div className="like-section">
+                <button onClick={handleLike} disabled={userMode || !review.id || editMode}>
+                    Like:<span>{likes} likes</span>
+                </button>
+
+            </div>
+            <div>
+                <h2>Comments</h2>
+
+                {comments.map((comment) => (
+
+                    <span key={comment.id}>{comment?.user?.name} commented : {comment.body} <br /></span>
+
+
+                ))}
+
+            </div>
+            <div>
+                <h3>Type Comment Here</h3>
+                <label htmlFor="comment">{currentUser?.name}: </label>
+                <input type="text"
+                    id="comment"
+                    placeholder="Comment Here"
+                    name="comment"
+                    onChange={(event) => {
+                        const newPostCopy = { ...newComment }
+                        newPostCopy.body = event.target.value
+                        setNewComment(newPostCopy)
+                    }}
+                />
+                <button className="post-btn" onClick={handleCommentSave}>Post</button>
             </div>
         </div>
     )
