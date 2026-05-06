@@ -1,25 +1,117 @@
-To set up the project first pull it down from git.
+# Kaya Games
 
-In your terminal run: cd workspace/kaya-games
+Kaya Games is a community-driven game review platform where users can register, browse reviews written by others, and publish their own. Each review can include a Kaya reaction image and full text content, and authors can edit or delete their own posts.
 
-Then run: npm run dev
+---
 
-Install the database and then run: cd workspace/kaya-games-api
+## Features
 
-And then run:  json-server -p 9001 database.json
+- Register and log in to your account
+- Browse all game reviews on the Review List page
+- Read full review details including author and reaction image
+- Create new reviews with a title, body, and Kaya reaction
+- Edit or delete your own reviews
+- Home and About pages with site context
 
-Navigate to the website with the click provided in the terminal running kaya-games.
+---
 
-Once in register to become a part of the site.
+## Tech Stack
 
-Once you are in you are free to navigate. Check out the about page, the review list, or home.
+| Layer     | Technology                              |
+|-----------|-----------------------------------------|
+| Frontend  | React 18, React Router v6, Vite 5       |
+| Backend   | json-server (file-based REST API)       |
+| Auth      | Custom login/register via localStorage  |
+| Language  | JavaScript / JSX                        |
 
-Create a new review by clicking Create New Review and follow the instructions on the page.
+---
 
-View Reveiws by clicking on them.
+## Prerequisites
 
-You will be free to edit or delete your own reviews after publishing them by clicking the respective buttons.
+Make sure you have the following installed before getting started:
 
-Here is the link to the api repository https://github.com/jaymenelson56/kaya-games-api
+- [Node.js](https://nodejs.org/) v18 or higher (includes npm)
+- json-server installed globally:
 
+```bash
+npm install -g json-server
+```
 
+---
+
+## Installation & Setup
+
+### 1. Clone both repositories
+
+```bash
+git clone https://github.com/jaymenelson56/kaya-games.git
+git clone https://github.com/jaymenelson56/kaya-games-api.git
+```
+
+### 2. Install dependencies
+
+```bash
+cd kaya-games
+npm install
+```
+
+### 3. Start the API server
+
+In a separate terminal, from the `kaya-games-api` directory:
+
+```bash
+cd kaya-games-api
+json-server -p 9001 database.json
+```
+
+The API will be available at `http://localhost:9001`.
+
+### 4. Start the frontend
+
+Back in the `kaya-games` directory:
+
+```bash
+npm run dev
+```
+
+Open the URL shown in the terminal — typically `http://localhost:5173`.
+
+---
+
+## Available Scripts
+
+| Command           | Description                          |
+|-------------------|--------------------------------------|
+| `npm run dev`     | Start the Vite development server    |
+| `npm run build`   | Build for production                 |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint to check code quality     |
+
+---
+
+## Project Structure
+
+```
+kaya-games/
+├── public/             # Static assets (images)
+├── src/
+│   ├── components/
+│   │   ├── Auth/       # Login and Register forms
+│   │   ├── Review/     # ReviewList, ReviewDetails, CreateReview
+│   │   ├── Nav/        # Navigation bar
+│   │   ├── Home/       # Home page
+│   │   ├── About/      # About page
+│   │   ├── View/       # Route management
+│   │   └── services/   # API service functions
+│   ├── App.jsx         # Root component and route setup
+│   └── main.jsx        # React entry point
+├── index.html
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## Related Repositories
+
+- [kaya-games-api](https://github.com/jaymenelson56/kaya-games-api) — JSON database and API server
